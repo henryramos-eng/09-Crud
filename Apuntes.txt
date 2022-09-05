@@ -1,0 +1,24 @@
+Angular: comandos para la instalacion
+
+- npm install -g @angular/cli
+- ng new PROJECT
+- cd PROJECT
+- ng serve
+
+> Angular
+	app :trabajaremos con este campo en la mayoria del tiempo
+	assets : es el archivo donde se guardan las librerias como Bootstrap, imagenes, etc
+	envoironments: 
+
+> App.component.ts-> TypeScript @Component
+> App.component.html-> Html 
+> App.modulos.ts-> ruta e importacion
+> app-root
+***********************************************************
+> Generar Componentes dentro de App desde la consola de comandos
+	- nos posicionamos en el proyecto y carpeta para generar estos archivos
+	- ng g c heroes/listado
+		- listado.component.css
+		- listado.component.html
+		- listado.component.spec.ts
+		- listado.component.ts

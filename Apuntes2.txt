@@ -1,0 +1,91 @@
+
+******************************************************************************
+1. ng g m shared
+
+2. ng g m reactive --routing
+2.1 ng g m reactive/basicos
+2.2 ng g m reactive/dinamicos
+2.3 ng g m reactive/switches
+
+reactive-routing.module.ts
+	-> const routes: Routes = [
+	{
+		path : '',
+		children:[
+			{path:'basicos', component: BasicosComponent},
+			{path:'dinamicos', component: DinamicosComponent},
+			{path:'switches', component: SwitchesComponent},
+			{ path: '**', redirectTo:'basicos'}			
+]
+	}
+				];
+
+
+3. ng g m template --routing
+3.1 ng g m template/basicos
+3.2 ng g m template/dinamicos
+3.3 ng g m template/switches
+reactive-routing.module.ts
+const routes: Routes = [
+  {
+    path: '',
+    children: [
+      { path: 'basicos', component: BasicosComponent },
+      { path: 'dinamicos', component: DinamicosComponent },
+      { path: 'switches', component: SwitchesComponent },
+      { path: '**', redirectTo: 'basicos' },
+    ]
+  }
+];
+
+4 app-routing.module.ts
+
+const routes: Routes = [
+  {
+    path: 'template',
+    loadChildren: () => import('./template/template.module').then(m => m.TemplateModule)
+  },
+  {
+    path: 'reactive',
+    loadChildren: () => import('./reactive/reactive.module').then(m => m.ReactiveModule)
+  }
+];
+
+**********************************************
+Routes
+> ng g m appRouting --flat 
+
+Errores se manejan en el archivo Shared
+> Routas se manejan en un archivo llamado Routing - auth
+*********************************************************************************************************************************************************************************
+import { Directive, Input } from '@angular/core';
+import { FormControl, NG_VALIDATORS, Validator } from '@angular/forms';
+
+@Directive({
+    selector: '[customMin][ngModel]',
+    providers: [{
+        provide: NG_VALIDATORS,
+        useExisting: CustomMinDirective,
+        multi: true
+    }]
+})
+export class CustomMinDirective implements Validator {
+
+    @Input() minimo!: number;
+
+    constructor() {}
+
+    validate( control: FormControl ) {
+        const inputValue = control.value;
+        return ( inputValue < this.minimo )
+                ? { 'customMin': true }
+                : null;
+    }
+
+}
+**************************************************************************************
+spring.datasource.url=jdbc:mariadb://localhost:3306/db_1?serverTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=
+spring.datasource.driver-class-name=org.mysql.jdbc.Driver
+spring.jpa.hibernate.ddl-auto=create
